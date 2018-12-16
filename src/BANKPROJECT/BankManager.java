@@ -4,6 +4,9 @@ public class BankManager {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
+		//Login login = new Login();
+
 		BankReader reader = new BankReader();
 		
 		BankAccount ordinary_account = new BankAccount(0);		
