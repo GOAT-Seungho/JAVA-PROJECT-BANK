@@ -8,8 +8,8 @@ public class BankWriter extends JPanel {
 	
 	
 	// 창의 크기 
-	private int WIDTH = 600;
-	private int HEIGHT = 400;
+	private int WIDTH = 300;
+	private int HEIGHT = 200;
 	
 	// 이 출력 뷰에 연관된 은행 계좌
 	private BankAccount bank;
