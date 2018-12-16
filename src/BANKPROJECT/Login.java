@@ -15,7 +15,7 @@ public class Login extends JFrame implements ActionListener {
 	JButton button_join; // Join 버튼
 	JTextField ID; // 아이디 
 	JTextField PW; // 비밀번호
-	
+	private int member_check = 0;
 	
 	public Login() {
 		
@@ -42,6 +42,7 @@ public class Login extends JFrame implements ActionListener {
 		c.add(button_join);
 		
 		setSize(290, 150);
+		setLocationRelativeTo(null);
 		setVisible(true);
 		
 		button_ok.addActionListener(this);
@@ -49,63 +50,45 @@ public class Login extends JFrame implements ActionListener {
 		button_join.addActionListener(this);
 	}
 	
-	//회원가입
-//	if(ie.getSource().equals(btn1)) {
-//		//login
-//		String account = id.getText()+","+pw.getText()+"\n";
-//        
-//        File file = new File("test1.txt");
-//        FileWriter writer = null;
-//        
-//        try {
-//            // 기존 파일의 내용에 이어서 쓰려면 true를, 기존 내용을 없애고 새로 쓰려면 false를 지정한다.
-//            writer = new FileWriter(file, true);
-//            writer.write(account);
-//            writer.flush();
-//            
-//            System.out.println("DONE");
-//        } catch(IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if(writer != null) writer.close();
-//            } catch(IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-	
 	
 	public void actionPerformed(ActionEvent ie) {
-
+		
 		if (ie.getSource().equals(button_ok)) { // OK 버튼을 눌렀을 
 			
 			String member_info = ID.getText() + "," + PW.getText(); // 입력값
-	        
+	        String master = "master,master";
 			BufferedReader bufReader = null;
 	        
 	        try {
 	            String line = "";
 	            // 파일 객체 생성
-	            File file = new File("test1.txt");
+	            File file = new File("members.txt");
 	            // 입력 스트림 생성
 	            FileReader filereader = new FileReader(file);
 	            // 입력 버퍼 생성
 	            bufReader = new BufferedReader(filereader);
 	            
-	            System.out.println(member_info);
-	            
 	            // 더이상 읽어들일게 없을 때까지 읽어들이게 합니다.
 	            while ( (line = bufReader.readLine() ) != null) { // .readLine()은 끝에 개행문자를 읽지 않는다.
 	            	// 만약 입력한 값과 text 파일의 값이 같으면 창 종료
+	            	
 	            	if(line.equals(member_info)) {
+	            		member_check = 1;
+	            		if(line.equals(master)) {
+		            		JOptionPane.showMessageDialog(null, "Master Mode");
+		            		setVisible(false);
+		            		new Master();
+		            		break;
+		            	}
 	            		JOptionPane.showMessageDialog(null, "Welcome!");
 	            		setVisible(false);
+	            		BankManager.run();
 	            	}
-//	            	else {
-//	            		JOptionPane.showMessageDialog(null, "Do Remind!");
-//	            		break;
-//	            	}
+	            	
 
+	            }
+	            if(member_check == 0) {
+	            	JOptionPane.showMessageDialog(null, "Do Remind!");
 	            }
 	        }
 	        

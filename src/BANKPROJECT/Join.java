@@ -38,6 +38,7 @@ public class Join extends JFrame implements ActionListener {
 		c.add(button_cancel);
 		
 		setSize(290, 150);
+		setLocationRelativeTo(null);
 		setVisible(true);
 		
 		button_ok.addActionListener(this);
@@ -49,7 +50,7 @@ public class Join extends JFrame implements ActionListener {
 		if (ie.getSource().equals(button_ok)) {
 			String member_info = ID.getText() + "," + PW.getText() + "\n";
 			
-			File file = new File("test1.txt");
+			File file = new File("members.txt");
 			FileWriter writer = null;
 			
 			try {
